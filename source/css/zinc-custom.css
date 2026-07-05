@@ -1,0 +1,250 @@
+:root {
+  --accent: #7acbdc;
+  --selection: #137a7f;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 16px;
+  line-height: 1.82;
+  letter-spacing: 0.025em;
+}
+
+pre,
+code,
+.highlight {
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  letter-spacing: normal;
+}
+
+::selection {
+  background: var(--selection);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: var(--selection);
+  color: #fff;
+}
+
+mark {
+  background: var(--selection);
+  color: #fff;
+}
+
+body h1,
+body .h1,
+article .content h2::before,
+#header #nav,
+#header #nav ul a,
+#header-post #nav,
+#header-post #nav ul a,
+#header-post .active,
+#header-post #toc .toc-level-2::before,
+#footer-post #nav-footer a,
+#footer-post #actions-footer a,
+#footer-post #toc-footer .toc-level-2::before {
+  color: var(--accent);
+}
+
+#header #nav {
+  margin-top: 5px;
+}
+
+#header #nav ul li,
+#header-post #nav ul li {
+  border-color: var(--accent);
+}
+
+.content a:hover,
+.content h1 a:hover,
+.content .h1 a:hover,
+.content h2 a:hover,
+.content h3 a:hover,
+.content h4 a:hover,
+.content h5 a:hover,
+.content h6 a:hover,
+#header #nav ul a:hover,
+#header-post #nav ul a:hover,
+#footer-post #nav-footer a:hover {
+  background-image: linear-gradient(
+    transparent,
+    transparent 4px,
+    var(--accent) 4px,
+    var(--accent)
+  );
+}
+
+.content a.icon:hover,
+#header-post a.icon:hover,
+#header-post #menu-icon:hover,
+#header-post #menu-icon-tablet:hover,
+#header-post #top-icon-tablet:hover,
+#header-post #toc a:hover,
+#footer-post a.icon:hover,
+#footer-post #toc-footer a:hover,
+.highlight .btn-copy:hover {
+  color: var(--accent);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+#search-result em.search-keyword {
+  border-bottom-color: var(--selection);
+  background: var(--selection);
+  color: #fff;
+}
+
+article .content blockquote,
+article .content blockquote::before {
+  color: #00ffff;
+}
+
+body.tag-modal-open {
+  overflow: hidden;
+}
+
+.tag-modal[hidden],
+.tag-explorer-panel[hidden] {
+  display: none;
+}
+
+.tag-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  background: rgba(29, 31, 33, 0.98);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 280ms cubic-bezier(0.8, 0, 0.2, 1),
+    visibility 280ms cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.tag-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tag-modal-dialog {
+  width: min(48rem, calc(100% - 2rem));
+  margin: 4rem auto;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 280ms cubic-bezier(0.8, 0, 0.2, 1),
+    transform 280ms cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.tag-modal.is-open .tag-modal-dialog {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tag-modal-dialog > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag-modal-dialog > header h1 {
+  margin-top: 0;
+}
+
+.tag-modal-close {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #c9cacc;
+  font: inherit;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+.tag-modal-close:hover {
+  color: var(--accent);
+}
+
+.tag-explorer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.tag-explorer-chip {
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  padding: 0.15rem 0.1rem;
+  background: transparent;
+  color: #c9cacc;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.tag-explorer-chip.is-active,
+.tag-explorer-chip:hover {
+  border-bottom-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.tag-explorer-panel h2 {
+  color: #eee;
+}
+
+.tag-explorer-panel ul {
+  padding: 0;
+  list-style: none;
+}
+
+.tag-explorer-panel li a {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.4rem 0;
+  color: #fff;
+  text-decoration: none;
+  background: none !important;
+  background-image: none !important;
+}
+
+.tag-explorer-panel li a span {
+  color: #fff;
+}
+
+.tag-explorer-panel li a:hover span {
+  color: var(--accent);
+}
+
+.tag-explorer-panel time,
+.tag-explorer-empty {
+  color: #908d8d;
+}
+
+.tag-explorer-panel time {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  #header #nav {
+    margin-top: 0;
+  }
+
+  .tag-modal-dialog {
+    margin: 2rem auto;
+  }
+
+  .tag-explorer-panel li a {
+    grid-template-columns: 8.75rem minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .tag-explorer-panel time {
+    font-size: 0.82rem;
+  }
+}

@@ -1,0 +1,31 @@
+colorscheme: dark
+
+nav:
+  home: /
+  articles: /archives/
+  tag: /tags/
+  about: /about/
+
+posts_overview:
+  show_all_posts: false
+  post_count: 10
+
+tags_overview: false
+
+social_links:
+  -
+    icon: github
+    label: GitHub
+    link: https://github.com/ZincDYX
+
+copyright:
+  start_year: 2026
+  end_year:
+
+logo:
+  enabled: true
+  width: 52
+  height: 52
+  url: /images/site-mark.png
+  gravatar: false
+  grayout: false
