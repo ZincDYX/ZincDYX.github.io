@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Ark Pixel";
+  src: url("../fonts/ark-pixel-12px-proportional-zh_cn.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   --accent: #7acbdc;
   --selection: #137a7f;
@@ -9,6 +17,13 @@ body {
   font-size: 16px;
   line-height: 1.82;
   letter-spacing: 0.025em;
+}
+
+body h1,
+body .h1,
+#header #title h1 {
+  font-family: "Ark Pixel", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
 }
 
 pre,
@@ -102,6 +117,52 @@ article .content h2::before,
 article .content blockquote,
 article .content blockquote::before {
   color: #00ffff;
+}
+
+.corner-character-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 60px;
+  z-index: 1;
+  width: clamp(120px, 18vw, 360px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.corner-character {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+}
+
+.corner-character-bubble {
+  position: absolute;
+  bottom: calc(100% + 28px);
+  left: 28px;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 2rem));
+  padding: 10px 12px;
+  border: 2px solid #1cd4d4;
+  background: #1d1f21;
+  color: #1cd4d4;
+  font-family: "Ark Pixel", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.corner-character-bubble::after {
+  position: absolute;
+  bottom: -8px;
+  left: 28px;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #1cd4d4;
+  border-bottom: 2px solid #1cd4d4;
+  background: #1d1f21;
+  content: "";
+  transform: rotate(45deg);
 }
 
 body.tag-modal-open {
@@ -234,6 +295,15 @@ body.tag-modal-open {
 @media (max-width: 480px) {
   #header #nav {
     margin-top: 0;
+  }
+
+  .corner-character-wrap {
+    width: 120px;
+  }
+
+  .corner-character-bubble {
+    max-width: calc(100vw - 76px);
+    font-size: 14px;
   }
 
   .tag-modal-dialog {
