@@ -85,6 +85,7 @@ article .content h2::before,
 #footer-post a.icon:hover,
 #footer-post #toc-footer a:hover,
 .highlight .btn-copy:hover {
+  background: none;
   color: var(--accent);
 }
 
