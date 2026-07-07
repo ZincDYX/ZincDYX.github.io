@@ -298,7 +298,7 @@ body.tag-modal-open {
   }
 
   .corner-character-wrap {
-    width: 120px;
+    display: none;
   }
 
   .corner-character-bubble {
