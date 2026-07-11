@@ -1,5 +1,8 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -62,6 +65,27 @@ function renderTagExplorer(tagCollection) {
     </div>`;
 }
 
+function readProjectLinks() {
+  const projectsPath = path.join(hexo.source_dir, 'projects', 'index.md');
+  if (!fs.existsSync(projectsPath)) return [];
+
+  const markdown = fs.readFileSync(projectsPath, 'utf8');
+  const links = [];
+  const headingLink = /^#{1,6}\s+\[([^\]]+)\]\(([^)]+)\)/gm;
+  let match;
+
+  while ((match = headingLink.exec(markdown)) !== null) {
+    links.push({
+      name: match[1].trim(),
+      url: match[2].trim()
+    });
+  }
+
+  return links;
+}
+
+hexo.locals.set('projectLinks', readProjectLinks);
+
 hexo.extend.generator.register('tag-explorer', function generateTagExplorer(locals) {
   const content = renderTagExplorer(locals.tags);
   const assets = `<link rel="stylesheet" href="${sitePath('css/zinc-custom.css')}">` +
@@ -87,7 +111,11 @@ hexo.extend.generator.register('tag-explorer', function generateTagExplorer(loca
 hexo.extend.filter.register('after_render:html', function injectSiteAssets(html) {
   const stylesheet = sitePath('css/zinc-custom.css');
   const script = sitePath('js/zinc-custom.js');
+  const pixelFont = sitePath('fonts/ark-pixel-12px-proportional-zh_cn.woff2');
 
+  if (!html.includes(pixelFont)) {
+    html = html.replace('</head>', `<link rel="preload" href="${pixelFont}" as="font" type="font/woff2" crossorigin>\n</head>`);
+  }
   if (!html.includes(stylesheet)) {
     html = html.replace('</head>', `<link rel="stylesheet" href="${stylesheet}">\n</head>`);
   }

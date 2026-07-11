@@ -3,6 +3,7 @@ colorscheme: dark
 nav:
   home: /
   articles: /archives/
+  projects: /projects/
   tag: /tags/
   about: /about/
 
@@ -29,3 +30,14 @@ logo:
   url: /images/site-mark.png
   gravatar: false
   grayout: false
+
+favicon:
+  desktop:
+    url: /images/site-favicon.ico
+    gravatar: false
+  android:
+    url: /images/site-favicon-192x192.png
+    gravatar: false
+  apple:
+    url: /images/site-apple-touch-icon.png
+    gravatar: false

@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   characterWrap.className = 'corner-character-wrap';
   character.className = 'corner-character';
   characterBubble.className = 'corner-character-bubble';
+  characterBubble.dataset.shortText = '\u6211\u5199\u7684\u592a\u5c0f\u4e86\u5417\uff1f';
   character.src = new URL(`images/${selectedCharacter.image}`, siteRoot);
   character.alt = '';
   character.setAttribute('aria-hidden', 'true');
@@ -58,6 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const articleMenu = document.querySelector('#header-post #menu');
   if (articleMenu && window.matchMedia('(min-width: 501px)').matches) {
     articleMenu.style.display = 'inline';
+  }
+
+  const articleNav = document.querySelector('#header-post #menu #nav');
+  if (articleNav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 50) {
+        articleNav.style.display = '';
+      }
+    }, { passive: true });
   }
 
   const modal = document.createElement('div');
@@ -107,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 280);
   }
 
-  document.querySelectorAll('#nav a[href*="/tags/"]').forEach(link => {
+  document.querySelectorAll('a[href*="/tags/"]').forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       openModal();
