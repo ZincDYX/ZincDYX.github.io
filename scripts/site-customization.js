@@ -86,6 +86,54 @@ function readProjectLinks() {
 
 hexo.locals.set('projectLinks', readProjectLinks);
 
+hexo.extend.filter.register('markdown-it:renderer', function enableGithubAlerts(md) {
+  const alertTypes = new Set(['NOTE', 'TIP', 'IMPORTANT', 'WARNING', 'CAUTION']);
+
+  md.block.ruler.before('blockquote', 'github_alert', (state, startLine, endLine, silent) => {
+    const start = state.bMarks[startLine] + state.tShift[startLine];
+    const max = state.eMarks[startLine];
+    const firstLine = state.src.slice(start, max);
+    const match = firstLine.match(/^>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/i);
+
+    if (!match) return false;
+    if (silent) return true;
+
+    const type = match[1].toUpperCase();
+    if (!alertTypes.has(type)) return false;
+
+    const title = match[2].trim() || type[0] + type.slice(1).toLowerCase();
+    const lines = [];
+    let nextLine = startLine + 1;
+
+    while (nextLine < endLine) {
+      const lineStart = state.bMarks[nextLine] + state.tShift[nextLine];
+      const lineEnd = state.eMarks[nextLine];
+      const line = state.src.slice(lineStart, lineEnd);
+
+      if (line.trim() === '') {
+        lines.push('');
+        nextLine += 1;
+        continue;
+      }
+
+      if (!line.startsWith('>')) break;
+
+      lines.push(line.replace(/^>\s?/, ''));
+      nextLine += 1;
+    }
+
+    const renderedContent = md.render(lines.join('\n'));
+    const token = state.push('html_block', '', 0);
+    token.map = [startLine, nextLine];
+    token.content = `<div class="markdown-alert markdown-alert-${type.toLowerCase()}">\n` +
+      `<p class="markdown-alert-title">${md.utils.escapeHtml(title)}</p>\n` +
+      `${renderedContent}</div>\n`;
+    state.line = nextLine;
+
+    return true;
+  });
+});
+
 hexo.extend.generator.register('tag-explorer', function generateTagExplorer(locals) {
   const content = renderTagExplorer(locals.tags);
   const assets = `<link rel="stylesheet" href="${sitePath('css/zinc-custom.css')}">` +

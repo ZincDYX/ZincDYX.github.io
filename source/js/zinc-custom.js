@@ -70,6 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  const headerPost = document.querySelector('#header-post');
+  const articleShare = document.querySelector('#header-post #share');
+  if (headerPost && articleShare) {
+    const syncShareState = () => {
+      headerPost.classList.toggle('is-share-open', articleShare.style.display !== 'none');
+    };
+
+    new MutationObserver(syncShareState).observe(articleShare, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+    syncShareState();
+  }
+
   const modal = document.createElement('div');
   modal.className = 'tag-modal';
   modal.hidden = true;

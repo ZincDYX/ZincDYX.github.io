@@ -146,6 +146,32 @@ article .content h2::before,
   font-size: 1.05rem;
 }
 
+#header-post #actions {
+  position: fixed;
+  top: 6.25rem;
+  right: 2rem;
+  width: auto;
+  margin-top: 0;
+  margin-right: 0;
+  text-align: right;
+}
+
+#header-post #toc {
+  margin-top: 3.25rem;
+}
+
+#header-post.is-share-open #toc {
+  margin-top: 23rem;
+}
+
+#header-post #share {
+  position: fixed;
+  top: 8.25rem;
+  right: 2rem;
+  padding-top: 0;
+  padding-right: 0;
+}
+
 #header #nav ul li,
 #header-post #nav ul li {
   border-color: var(--accent);
@@ -196,6 +222,58 @@ article .content h2::before,
 article .content blockquote,
 article .content blockquote::before {
   color: #00ffff;
+}
+
+.markdown-alert {
+  margin: 1.25rem 0;
+  padding: 0.85rem 1rem;
+  border-left: 0.25rem solid var(--accent);
+  background: rgba(19, 122, 127, 0.12);
+  color: #c9cacc;
+}
+
+.markdown-alert-title {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.markdown-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-note {
+  border-left-color: #7acbdc;
+}
+
+.markdown-alert-tip {
+  border-left-color: #00ffff;
+}
+
+.markdown-alert-important,
+.markdown-alert-warning,
+.markdown-alert-caution {
+  border-left-color: #ffcc66;
+}
+
+.footnotes {
+  margin-top: 2rem;
+  font-size: 0.9em;
+  color: #c9cacc;
+}
+
+.footnotes-sep {
+  opacity: 0.35;
+}
+
+.footnote-ref,
+.footnote-backref {
+  color: var(--accent);
+}
+
+article .content strong,
+article .content b {
+  color: var(--accent);
 }
 
 .corner-character-wrap {
